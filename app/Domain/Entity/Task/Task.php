@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Entities\Task;
+namespace App\Domain\Entity\Task;
 
 readonly class Task
 {
