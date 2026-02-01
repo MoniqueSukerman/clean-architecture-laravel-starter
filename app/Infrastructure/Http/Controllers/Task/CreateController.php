@@ -15,19 +15,31 @@ class CreateController
     {}
     public function __invoke(Request $request) : JsonResponse
     {
-        $input = new CreateInput(
-            $request->input('title'),
-            $request->input('description'),
-            $request->input('status'),
-        );
+        try {
+            /**
+             * Cria um DTO com os dados vindos da requisição para passar para a camada de aplicação
+             */
+            $input = new CreateInput(
+                $request->input('title'),
+                $request->input('description'),
+                $request->input('status'),
+            );
 
-        $output = $this->createUseCase->execute($input);
+            /**
+             * Executa o caso de uso de criação de tarefa, que retorna um DTO com os dados da tarefa criada
+             */
+            $output = $this->createUseCase->execute($input);
 
-        return response()->json([
-            'id' => $output->id,
-            'title' => $output->title,
-            'description' => $output->description,
-            'status' => $output->status,
-        ], 201);
+            return response()->json([
+                'id' => $output->id,
+                'title' => $output->title,
+                'description' => $output->description,
+                'status' => $output->status,
+            ], 201);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'error' => $th->getMessage(),
+            ], 500);
+        }
     }
 }

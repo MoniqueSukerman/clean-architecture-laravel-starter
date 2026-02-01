@@ -8,6 +8,9 @@ use \App\Domain\Entity\Task\Task as DomainTask;
 
 class TaskEloquentRepository implements TaskRepository
 {
+    /**
+     * Recebe uma entidade de domínio e retorna uma entidade de domínio. Porque a camada de aplicação não conhece Eloquent
+     */
     public function create(DomainTask $task): DomainTask
     {
         $eloquentTask = Task::create([

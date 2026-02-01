@@ -8,6 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Task extends Model
 {
     use HasUuids;
+
+//  protected $attributes = [
+    protected $fillable = [
+        'title',
+        'description',
+        'status',
+    ];
+
 //    /**
 //     * The table associated with the model.
 //     *
@@ -33,12 +41,6 @@ class Task extends Model
 //    protected string $title;
 //    protected string $description;
 //    protected string $status;
-
-    protected $fillable = [
-        'title',
-        'description',
-        'status',
-    ];
 
 //    public function __construct(
 //        string $id,

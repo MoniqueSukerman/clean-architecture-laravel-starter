@@ -11,7 +11,7 @@ use App\Domain\Repository\Task\TaskRepository;
 class Create
 {
     public function __construct(
-        private readonly TaskRepository $taskRepository,
+        private readonly TaskRepository $taskRepository, //Interface - o Mapeamento para a classe concreta é feito em app/Providers/AppServiceProvider.php
         private readonly AppToDomain    $appToDomain,
         private readonly DomainToApp    $domainToApp,
     )
@@ -21,8 +21,6 @@ class Create
     public function execute(CreateInput $input): CreateOutput
     {
         $domainTask = $this->appToDomain->createInputToTaskDomain($input);
-
-
         $createdTask = $this->taskRepository->create($domainTask);
 
         return $this->domainToApp->taskDomainToCreateOutput($createdTask);
