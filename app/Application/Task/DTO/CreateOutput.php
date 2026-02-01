@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Domain\Entity\Task;
+namespace App\Application\Task\DTO;
 
-readonly class Task
+class CreateOutput
 {
     public function __construct(
+        public string $id,
         public string $title,
         public string $description,
         public string $status,
-        public ?string $id = null,
     ) {
     }
+
 }
