@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Task extends Model
 {
-    use HasUuids;
+    use HasUuids; //teste
 
 //  protected $attributes = [
     protected $fillable = [
