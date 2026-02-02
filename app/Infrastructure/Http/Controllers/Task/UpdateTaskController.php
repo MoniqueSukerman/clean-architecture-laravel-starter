@@ -2,15 +2,15 @@
 
 namespace App\Infrastructure\Http\Controllers\Task;
 
-use App\Application\Task\Input\UpdateInput;
-use App\Application\Task\UseCase\Update;
+use App\Application\Task\Input\UpdateTaskInput;
+use App\Application\Task\UseCase\UpdateTaskUseCase;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-class UpdateController
+class UpdateTaskController
 {
     public function __construct(
-        private readonly Update $updateUseCase
+        private readonly UpdateTaskUseCase $updateUseCase
     )
     {
     }
@@ -18,7 +18,7 @@ class UpdateController
     public function __invoke(Request $request) : JsonResponse
     {
         try {
-            $task = new UpdateInput(
+            $task = new UpdateTaskInput(
                 $request->route('id'),
                 $request->input('title'),
                 $request->input('description'),

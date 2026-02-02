@@ -2,13 +2,13 @@
 
 namespace App\Application\Task\Mapper;
 
-use App\Application\Task\Input\CreateInput;
-use App\Application\Task\Input\UpdateInput;
+use App\Application\Task\Input\CreateTaskInput;
+use App\Application\Task\Input\UpdateTaskInput;
 use App\Domain\Entity\Task\Task;
 
-class AppToDomain
+class AppToDomainMapper
 {
-    public function createInputToTaskDomain(CreateInput $createInput) : Task
+    public function createInputToTaskDomain(CreateTaskInput $createInput) : Task
     {
      return new Task(
             $createInput->title,
@@ -17,7 +17,7 @@ class AppToDomain
         );
     }
 
-    public function updateInputToTaskDomain(UpdateInput $updateInput) : Task
+    public function updateInputToTaskDomain(UpdateTaskInput $updateInput) : Task
     {
         return new Task(
             $updateInput->title,

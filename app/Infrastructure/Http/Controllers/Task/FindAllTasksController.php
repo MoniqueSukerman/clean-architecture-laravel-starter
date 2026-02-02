@@ -2,13 +2,13 @@
 
 namespace App\Infrastructure\Http\Controllers\Task;
 
-use App\Application\Task\UseCase\FindAll;
+use App\Application\Task\UseCase\FindAllTasksUseCase;
 use Illuminate\Http\JsonResponse;
 
-class FindAllController
+class FindAllTasksController
 {
     public function __construct(
-        private readonly FindAll $findAllUseCase,
+        private readonly FindAllTasksUseCase $findAllUseCase,
     )
     {}
     public function __invoke() : JsonResponse

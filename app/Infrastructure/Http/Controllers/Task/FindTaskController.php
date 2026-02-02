@@ -2,14 +2,14 @@
 
 namespace App\Infrastructure\Http\Controllers\Task;
 
-use App\Application\Task\UseCase\Find;
+use App\Application\Task\UseCase\FindTaskUseCase;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-class FindController
+class FindTaskController
 {
     public function __construct(
-        private readonly Find $findUseCase,
+        private readonly FindTaskUseCase $findUseCase,
     )
     {}
     public function __invoke(Request $request) : JsonResponse

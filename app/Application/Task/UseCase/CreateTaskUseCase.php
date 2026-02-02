@@ -2,23 +2,23 @@
 
 namespace App\Application\Task\UseCase;
 
-use App\Application\Task\Input\CreateInput;
-use App\Application\Task\Mapper\AppToDomain;
-use App\Application\Task\Mapper\DomainToApp;
-use App\Application\Task\Output\CreateOutput;
+use App\Application\Task\Input\CreateTaskInput;
+use App\Application\Task\Mapper\AppToDomainMapper;
+use App\Application\Task\Mapper\DomainToAppMapper;
+use App\Application\Task\Output\CreateTaskOutput;
 use App\Domain\Repository\Task\TaskRepository;
 
-class Create
+class CreateTaskUseCase
 {
     public function __construct(
-        private readonly TaskRepository $taskRepository, //Interface - o Mapeamento para a classe concreta é feito em app/Providers/AppServiceProvider.php
-        private readonly AppToDomain    $appToDomain,
-        private readonly DomainToApp    $domainToApp,
+        private readonly TaskRepository    $taskRepository, //Interface - o Mapeamento para a classe concreta é feito em app/Providers/AppServiceProvider.php
+        private readonly AppToDomainMapper $appToDomain,
+        private readonly DomainToAppMapper $domainToApp,
     )
     {
     }
 
-    public function execute(CreateInput $input): CreateOutput
+    public function execute(CreateTaskInput $input): CreateTaskOutput
     {
         /**
          * Mapeia o DTO de entrada para uma entidade de domínio

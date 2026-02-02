@@ -2,17 +2,17 @@
 
 namespace App\Application\Task\Mapper;
 
-use App\Application\Task\Output\CreateOutput;
-use App\Application\Task\Output\FindAllOutput;
-use App\Application\Task\Output\FindOutput;
-use App\Application\Task\Output\UpdateOutput;
+use App\Application\Task\Output\CreateTaskOutput;
+use App\Application\Task\Output\FindAllTasksOutput;
+use App\Application\Task\Output\FindTaskOutput;
+use App\Application\Task\Output\UpdateTaskOutput;
 use App\Domain\Entity\Task\Task;
 
-class DomainToApp
+class DomainToAppMapper
 {
-    public function taskDomainToCreateOutput(Task $task) : CreateOutput
+    public function taskDomainToCreateOutput(Task $task) : CreateTaskOutput
     {
-        return new CreateOutput(
+        return new CreateTaskOutput(
             $task->id,
             $task->title,
             $task->description,
@@ -20,9 +20,9 @@ class DomainToApp
         );
     }
 
-    public function taskDomainToUpdateOutput(Task $task) : UpdateOutput
+    public function taskDomainToUpdateOutput(Task $task) : UpdateTaskOutput
     {
-        return new UpdateOutput(
+        return new UpdateTaskOutput(
             $task->id,
             $task->title,
             $task->description,
@@ -30,9 +30,9 @@ class DomainToApp
         );
     }
 
-    public function taskDomainToFindOutput(Task $task) : FindOutput
+    public function taskDomainToFindOutput(Task $task) : FindTaskOutput
     {
-        return new FindOutput(
+        return new FindTaskOutput(
             $task->id,
             $task->title,
             $task->description,
@@ -43,9 +43,9 @@ class DomainToApp
     /**
      * @param Task[] $tasks
      */
-    public function taskDomainToFindAllOutput(array $tasks) : FindAllOutput
+    public function taskDomainToFindAllOutput(array $tasks) : FindAllTasksOutput
     {
-        return new FindAllOutput(
+        return new FindAllTasksOutput(
             array_map(function (Task $task) {
                 return $this->taskDomainToFindOutput($task);
             }, $tasks)

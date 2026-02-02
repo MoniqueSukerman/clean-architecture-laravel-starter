@@ -2,15 +2,15 @@
 
 namespace App\Infrastructure\Http\Controllers\Task;
 
-use App\Application\Task\Input\CreateInput;
-use App\Application\Task\UseCase\Create;
+use App\Application\Task\Input\CreateTaskInput;
+use App\Application\Task\UseCase\CreateTaskUseCase;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-class CreateController
+class CreateTaskController
 {
     public function __construct(
-        private readonly Create $createUseCase
+        private readonly CreateTaskUseCase $createUseCase
     )
     {}
     public function __invoke(Request $request) : JsonResponse
@@ -19,7 +19,7 @@ class CreateController
             /**
              * Cria um DTO com os dados vindos da requisição para passar para a camada de aplicação
              */
-            $input = new CreateInput(
+            $input = new CreateTaskInput(
                 $request->input('title'),
                 $request->input('description'),
                 $request->input('status'),

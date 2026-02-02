@@ -2,10 +2,10 @@
 
 namespace App\Application\Task\Output;
 
-class FindAllOutput
+class FindAllTasksOutput
 {
     /**
-     * @param FindOutput[] $tasks
+     * @param FindTaskOutput[] $tasks
      */
     public function __construct(
         public array $tasks,

@@ -2,7 +2,7 @@
 
 namespace App\Application\Task\Output;
 
-class FindOutput
+class CreateTaskOutput
 {
     public function __construct(
         public string $id,

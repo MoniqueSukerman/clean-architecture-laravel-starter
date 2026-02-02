@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Application\Task\Output;
+namespace App\Application\Task\Input;
 
-class CreateOutput
+class CreateTaskInput
 {
     public function __construct(
-        public string $id,
         public string $title,
         public string $description,
         public string $status,

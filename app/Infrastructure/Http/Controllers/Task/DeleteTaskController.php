@@ -2,15 +2,15 @@
 
 namespace App\Infrastructure\Http\Controllers\Task;
 
-use App\Application\Task\UseCase\Delete;
+use App\Application\Task\UseCase\DeleteTaskUseCase;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
-class DeleteController
+class DeleteTaskController
 {
     public function __construct(
-        private readonly Delete $deleteUseCase,
+        private readonly DeleteTaskUseCase $deleteUseCase,
     )
     {}
     public function __invoke(Request $request) : JsonResponse|Response

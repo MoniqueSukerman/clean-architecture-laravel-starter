@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Application\Task\Output;
+namespace App\Application\Task\Input;
 
-class UpdateOutput
+class UpdateTaskInput
 {
     public function __construct(
         public string $id,
