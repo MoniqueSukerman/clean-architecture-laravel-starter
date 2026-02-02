@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Application\Task\DTO;
+namespace App\Application\Task\Output;
 
-class CreateOutput
+class UpdateOutput
 {
     public function __construct(
         public string $id,

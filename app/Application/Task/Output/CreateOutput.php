@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Application\Task\DTO;
+namespace App\Application\Task\Output;
 
-class CreateInput
+class CreateOutput
 {
     public function __construct(
+        public string $id,
         public string $title,
         public string $description,
         public string $status,

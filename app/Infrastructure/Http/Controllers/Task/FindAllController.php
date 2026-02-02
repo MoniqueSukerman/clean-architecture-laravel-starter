@@ -1,0 +1,36 @@
+<?php
+
+namespace App\Infrastructure\Http\Controllers\Task;
+
+use App\Application\Task\UseCase\FindAll;
+use Illuminate\Http\JsonResponse;
+
+class FindAllController
+{
+    public function __construct(
+        private readonly FindAll $findAllUseCase,
+    )
+    {}
+    public function __invoke() : JsonResponse
+    {
+        try {
+            $output = $this->findAllUseCase->execute();
+
+            $tasks = array_map(function ($task) {
+                return [
+                    'id' => $task->id,
+                    'title' => $task->title,
+                    'description' => $task->description,
+                    'status' => $task->status,
+                ];
+            }, $output->tasks);
+
+            return response()->json($tasks);
+
+        } catch (\Throwable $th) {
+            return response()->json([
+                'error' => $th->getMessage(),
+            ], 500);
+        }
+    }
+}

@@ -2,7 +2,7 @@
 
 namespace App\Infrastructure\Http\Controllers\Task;
 
-use App\Application\Task\DTO\CreateInput;
+use App\Application\Task\Input\CreateInput;
 use App\Application\Task\UseCase\Create;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;

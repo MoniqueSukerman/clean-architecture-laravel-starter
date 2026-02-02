@@ -24,21 +24,36 @@ class TaskEloquentRepository implements TaskRepository
 
     public function update(DomainTask $task): DomainTask
     {
-        // TODO: Implement update() method.
+        $eloquentTask = Task::find($task->id);
+        $eloquentTask->title = $task->title;
+        $eloquentTask->description = $task->description;
+        $eloquentTask->status = $task->status;
+        $eloquentTask->save();
+
+        return new DomainTask($eloquentTask->title, $eloquentTask->description, $eloquentTask->status, $eloquentTask->id);
     }
 
-    public function delete(DomainTask $task): void
+    public function delete(string $id): void
     {
-        // TODO: Implement delete() method.
+        Task::destroy($id);
     }
 
     public function find(string $id): DomainTask
     {
-        // TODO: Implement find() method.
+        $eloquentTask = Task::find($id);
+
+        return new DomainTask($eloquentTask->title, $eloquentTask->description, $eloquentTask->status, $eloquentTask->id);
     }
 
+    /**
+     * @return DomainTask[]
+     */
     public function all(): array
     {
-        // TODO: Implement all() method.
+        $eloquentTasks = Task::all()->toArray();
+
+        return array_map(function ($task) {
+            return new DomainTask($task['title'], $task['description'], $task['status'], $task['id']);
+        }, $eloquentTasks);
     }
 }
