@@ -20,9 +20,9 @@ class UpdateTaskController
     {
             $task = new UpdateTaskInput(
                 $request->route('id'),
-                $request->input('title'),
-                $request->input('description'),
-                $request->input('status'),
+                $request->validated('title'),
+                $request->validated('description'),
+                $request->validated('status'),
             );
 
             $updatedTask = $this->updateUseCase->execute($task);

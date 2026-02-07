@@ -39,9 +39,9 @@ class TaskEloquentRepository implements TaskRepository
             throw new TaskNotFoundException($task->id);
         }
 
-        $eloquentTask->title = $task->title;
+        $eloquentTask->title = $task->title->value;
         $eloquentTask->description = $task->description;
-        $eloquentTask->status = $task->status;
+        $eloquentTask->status = $task->status->value;
         $eloquentTask->save();
 
         return new DomainTask(new TaskTitle($eloquentTask->title), $eloquentTask->description, TaskStatus::from($eloquentTask->status), $eloquentTask->id);
@@ -63,6 +63,7 @@ class TaskEloquentRepository implements TaskRepository
 
     /**
      * @throws TaskNotFoundException
+     * @throws BadRequestException
      */
     public function find(string $id): DomainTask
     {
@@ -72,7 +73,7 @@ class TaskEloquentRepository implements TaskRepository
             throw new TaskNotFoundException($id);
         }
 
-        return new DomainTask($eloquentTask->title, $eloquentTask->description, $eloquentTask->status, $eloquentTask->id);
+        return new DomainTask(new TaskTitle($eloquentTask->title), $eloquentTask->description, TaskStatus::from($eloquentTask->status), $eloquentTask->id);
     }
 
     /**

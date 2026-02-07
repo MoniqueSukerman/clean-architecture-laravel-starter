@@ -34,9 +34,9 @@ class DomainToAppMapper
     {
         return new FindTaskOutput(
             $task->id,
-            $task->title,
+            $task->title->value,
             $task->description,
-            $task->status,
+            $task->status->value,
         );
     }
 
