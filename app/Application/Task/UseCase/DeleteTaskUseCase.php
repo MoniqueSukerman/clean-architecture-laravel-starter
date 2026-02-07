@@ -10,7 +10,6 @@ class DeleteTaskUseCase
 {
     public function __construct(
         private readonly TaskRepository    $taskRepository,
-        private readonly DomainToAppMapper $domainToApp,
     )
     {
     }

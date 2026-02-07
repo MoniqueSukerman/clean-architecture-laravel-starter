@@ -4,6 +4,7 @@ namespace App\Infrastructure\Http\Controllers\Task;
 
 use App\Application\Task\Input\CreateTaskInput;
 use App\Application\Task\UseCase\CreateTaskUseCase;
+use App\Infrastructure\Http\Requests\Task\CreateTaskRequest;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -13,16 +14,15 @@ class CreateTaskController
         private readonly CreateTaskUseCase $createUseCase
     )
     {}
-    public function __invoke(Request $request) : JsonResponse
+    public function __invoke(CreateTaskRequest $request) : JsonResponse
     {
-        try {
             /**
              * Cria um DTO com os dados vindos da requisição para passar para a camada de aplicação
              */
             $input = new CreateTaskInput(
-                $request->input('title'),
-                $request->input('description'),
-                $request->input('status'),
+                $request->validated('title'),
+                $request->validated('description'),
+                $request->validated('status'),
             );
 
             /**
@@ -36,10 +36,5 @@ class CreateTaskController
                 'description' => $output->description,
                 'status' => $output->status,
             ], 201);
-        } catch (\Throwable $th) {
-            return response()->json([
-                'error' => $th->getMessage(),
-            ], 500);
-        }
     }
 }
