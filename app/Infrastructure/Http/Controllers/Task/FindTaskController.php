@@ -14,7 +14,6 @@ class FindTaskController
     {}
     public function __invoke(Request $request) : JsonResponse
     {
-        try {
             $id = $request->route('id');
             $output = $this->findUseCase->execute($id);
 
@@ -24,11 +23,5 @@ class FindTaskController
                 'description' => $output->description,
                 'status' => $output->status,
             ]);
-
-        } catch (\Throwable $th) {
-            return response()->json([
-                'error' => $th->getMessage(),
-            ], 500);
-        }
     }
 }

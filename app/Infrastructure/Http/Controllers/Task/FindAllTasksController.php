@@ -13,7 +13,6 @@ class FindAllTasksController
     {}
     public function __invoke() : JsonResponse
     {
-        try {
             $output = $this->findAllUseCase->execute();
 
             $tasks = array_map(function ($task) {
@@ -26,11 +25,5 @@ class FindAllTasksController
             }, $output->tasks);
 
             return response()->json($tasks);
-
-        } catch (\Throwable $th) {
-            return response()->json([
-                'error' => $th->getMessage(),
-            ], 500);
-        }
     }
 }

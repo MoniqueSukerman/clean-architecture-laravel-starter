@@ -2,7 +2,9 @@
 
 namespace App\Domain\Exception\Task;
 
-class TaskNotFoundException extends TaskException
+use App\Domain\Exception\Http\NotFoundException;
+
+class TaskNotFoundException extends NotFoundException
 {
     public function __construct(string $id)
     {

@@ -2,7 +2,7 @@
 
 namespace App\Domain\Exception;
 
-class DomainException extends \Exception
+abstract class DomainException extends \Exception
 {
 
 }

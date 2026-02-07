@@ -15,16 +15,10 @@ class DeleteTaskController
     {}
     public function __invoke(Request $request) : JsonResponse|Response
     {
-        try {
             $id = $request->route('id');
 
             $this->deleteUseCase->execute($id);
 
             return response()->noContent();
-        } catch (\Throwable $th) {
-            return response()->json([
-                'error' => $th->getMessage(),
-            ], 500);
-        }
     }
 }

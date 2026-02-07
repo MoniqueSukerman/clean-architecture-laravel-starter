@@ -17,7 +17,6 @@ class UpdateTaskController
 
     public function __invoke(Request $request) : JsonResponse
     {
-        try {
             $task = new UpdateTaskInput(
                 $request->route('id'),
                 $request->input('title'),
@@ -33,10 +32,5 @@ class UpdateTaskController
                 'description' => $updatedTask->description,
                 'status' => $updatedTask->status,
             ]);
-        } catch (\Throwable $th) {
-            return response()->json([
-                'error' => $th->getMessage(),
-            ], 500);
-        }
     }
 }
