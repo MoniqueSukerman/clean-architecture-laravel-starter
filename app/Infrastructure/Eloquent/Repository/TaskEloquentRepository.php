@@ -2,29 +2,34 @@
 
 namespace App\Infrastructure\Eloquent\Repository;
 
+use App\Domain\Exception\Http\BadRequestException;
 use App\Domain\Exception\Task\TaskNotFoundException;
 use App\Domain\Repository\Task\TaskRepository;
+use App\Domain\ValueObject\Task\TaskStatus;
 use App\Infrastructure\Eloquent\Model\Task;
 use \App\Domain\Entity\Task\Task as DomainTask;
+use App\Domain\ValueObject\Task\TaskTitle;
 
 class TaskEloquentRepository implements TaskRepository
 {
     /**
      * Recebe uma entidade de domínio e retorna uma entidade de domínio. Porque a camada de aplicação não conhece Eloquent
+     * @throws BadRequestException
      */
     public function create(DomainTask $task): DomainTask
     {
         $eloquentTask = Task::create([
-            'title' => $task->title,
+            'title' => $task->title->value,
             'description' => $task->description,
-            'status' => $task->status,
+            'status' => $task->status->value,
         ]);
 
-        return new DomainTask($eloquentTask->title, $eloquentTask->description, $eloquentTask->status, $eloquentTask->id);
+        return new DomainTask(new TaskTitle($eloquentTask->title), $eloquentTask->description, TaskStatus::from($eloquentTask->status), $eloquentTask->id);
     }
 
     /**
      * @throws TaskNotFoundException
+     * @throws BadRequestException
      */
     public function update(DomainTask $task): DomainTask
     {
@@ -39,7 +44,7 @@ class TaskEloquentRepository implements TaskRepository
         $eloquentTask->status = $task->status;
         $eloquentTask->save();
 
-        return new DomainTask($eloquentTask->title, $eloquentTask->description, $eloquentTask->status, $eloquentTask->id);
+        return new DomainTask(new TaskTitle($eloquentTask->title), $eloquentTask->description, TaskStatus::from($eloquentTask->status), $eloquentTask->id);
     }
 
     /**
@@ -72,13 +77,14 @@ class TaskEloquentRepository implements TaskRepository
 
     /**
      * @return DomainTask[]
+     * @throws BadRequestException
      */
     public function all(): array
     {
         $eloquentTasks = Task::all()->toArray();
 
         return array_map(function ($task) {
-            return new DomainTask($task['title'], $task['description'], $task['status'], $task['id']);
+            return new DomainTask(new TaskTitle($task['title']), $task['description'], TaskStatus::from($task['status']), $task['id']);
         }, $eloquentTasks);
     }
 }

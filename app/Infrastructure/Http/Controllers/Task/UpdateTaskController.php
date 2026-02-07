@@ -4,6 +4,7 @@ namespace App\Infrastructure\Http\Controllers\Task;
 
 use App\Application\Task\Input\UpdateTaskInput;
 use App\Application\Task\UseCase\UpdateTaskUseCase;
+use App\Infrastructure\Http\Requests\Task\UpdateTaskRequest;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,7 @@ class UpdateTaskController
     {
     }
 
-    public function __invoke(Request $request) : JsonResponse
+    public function __invoke(UpdateTaskRequest $request) : JsonResponse
     {
             $task = new UpdateTaskInput(
                 $request->route('id'),

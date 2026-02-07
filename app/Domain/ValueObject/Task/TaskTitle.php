@@ -4,7 +4,7 @@ namespace App\Domain\ValueObject\Task;
 
 use App\Domain\Exception\Http\BadRequestException;
 
-readonly class TaskTitle : string
+readonly class TaskTitle
 {
     /**
      * @throws BadRequestException
