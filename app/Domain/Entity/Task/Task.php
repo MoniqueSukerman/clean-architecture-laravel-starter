@@ -14,11 +14,4 @@ readonly class Task
         public ?string $id = null,
     ) {
     }
-
-    public function validate() : void
-    {
-        if (empty(trim($this->description))) {
-            throw new \InvalidArgumentException('Descrição não pode ser vazia');
-        }
-    }
 }

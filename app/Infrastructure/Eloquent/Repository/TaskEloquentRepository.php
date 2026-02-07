@@ -23,9 +23,17 @@ class TaskEloquentRepository implements TaskRepository
         return new DomainTask($eloquentTask->title, $eloquentTask->description, $eloquentTask->status, $eloquentTask->id);
     }
 
+    /**
+     * @throws TaskNotFoundException
+     */
     public function update(DomainTask $task): DomainTask
     {
         $eloquentTask = Task::find($task->id);
+
+        if (!$eloquentTask instanceof Task) {
+            throw new TaskNotFoundException($task->id);
+        }
+
         $eloquentTask->title = $task->title;
         $eloquentTask->description = $task->description;
         $eloquentTask->status = $task->status;
@@ -48,9 +56,16 @@ class TaskEloquentRepository implements TaskRepository
         Task::destroy($id);
     }
 
+    /**
+     * @throws TaskNotFoundException
+     */
     public function find(string $id): DomainTask
     {
         $eloquentTask = Task::find($id);
+
+        if (!$eloquentTask instanceof Task) {
+            throw new TaskNotFoundException($id);
+        }
 
         return new DomainTask($eloquentTask->title, $eloquentTask->description, $eloquentTask->status, $eloquentTask->id);
     }

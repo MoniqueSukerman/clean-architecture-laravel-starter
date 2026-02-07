@@ -5,24 +5,33 @@ namespace App\Application\Task\Mapper;
 use App\Application\Task\Input\CreateTaskInput;
 use App\Application\Task\Input\UpdateTaskInput;
 use App\Domain\Entity\Task\Task;
+use App\Domain\Exception\Http\BadRequestException;
+use App\Domain\ValueObject\Task\TaskStatus;
+use App\Domain\ValueObject\Task\TaskTitle;
 
 class AppToDomainMapper
 {
+    /**
+     * @throws BadRequestException
+     */
     public function createInputToTaskDomain(CreateTaskInput $createInput) : Task
     {
      return new Task(
-            $createInput->title,
+            new TaskTitle($createInput->title),
             $createInput->description,
-            $createInput->status,
+            TaskStatus::from($createInput->status),
         );
     }
 
+    /**
+     * @throws BadRequestException
+     */
     public function updateInputToTaskDomain(UpdateTaskInput $updateInput) : Task
     {
         return new Task(
-            $updateInput->title,
+            new TaskTitle($updateInput->title),
             $updateInput->description,
-            $updateInput->status,
+            TaskStatus::from($updateInput->status),
             $updateInput->id,
         );
     }

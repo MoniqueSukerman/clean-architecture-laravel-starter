@@ -2,17 +2,22 @@
 
 namespace App\Domain\ValueObject\Task;
 
+use App\Domain\Exception\Http\BadRequestException;
+
 readonly class TaskTitle : string
 {
+    /**
+     * @throws BadRequestException
+     */
     public function __construct(
-        public string $title,
+        public string $value,
     ) {
-        if (empty(trim($title))) {
-            throw new \InvalidArgumentException('O título não pode ser vazio');
+        if (empty(trim($value))) {
+            throw new BadRequestException('O título não pode ser vazio');
         }
 
-        if (strlen($title) > 55) {
-            throw new \InvalidArgumentException('O título deve ter no máximo 55 caracteres');
+        if (strlen($value) > 55) {
+            throw new BadRequestException('O título deve ter no máximo 55 caracteres');
         }
     }
 }

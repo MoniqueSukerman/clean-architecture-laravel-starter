@@ -14,9 +14,9 @@ class DomainToAppMapper
     {
         return new CreateTaskOutput(
             $task->id,
-            $task->title,
+            $task->title->value,
             $task->description,
-            $task->status,
+            $task->status->value,
         );
     }
 
@@ -24,9 +24,9 @@ class DomainToAppMapper
     {
         return new UpdateTaskOutput(
             $task->id,
-            $task->title,
+            $task->title->value,
             $task->description,
-            $task->status,
+            $task->status->value,
         );
     }
 
