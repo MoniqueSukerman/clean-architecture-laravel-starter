@@ -4,6 +4,7 @@ namespace App\Infrastructure\Http\Controllers\Task;
 
 use App\Application\Task\Input\UpdateTaskInput;
 use App\Application\Task\UseCase\UpdateTaskUseCase;
+use App\Domain\Log\LoggerInterface;
 use App\Infrastructure\Http\Requests\Task\UpdateTaskRequest;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -11,7 +12,8 @@ use Illuminate\Http\Request;
 class UpdateTaskController
 {
     public function __construct(
-        private readonly UpdateTaskUseCase $updateUseCase
+        private readonly UpdateTaskUseCase $updateUseCase,
+        private readonly LoggerInterface $logger
     )
     {
     }
@@ -26,6 +28,8 @@ class UpdateTaskController
             );
 
             $updatedTask = $this->updateUseCase->execute($task);
+
+            $this->logger->info('Tarefa atualizada com sucesso');
 
             return response()->json([
                 'id' => $updatedTask->id,

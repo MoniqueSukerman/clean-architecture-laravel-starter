@@ -24,13 +24,15 @@ return Application::configure(basePath: dirname(__DIR__))
             $statusCode = HttpCode::INTERNAL_SERVER_ERROR->value;
 
             if ($e instanceof ValidationException) {
-                return response()->json($e->errors(), $e->status);
+                Log::error('Erro de validação: ' . $e->getMessage());
+                return response()->json($e->getMessage(), $e->status);
             }
 
             if ($e instanceof HttpException) {
                 $statusCode = $e->getStatusCode();
             }
 
+            Log::error('Erro: ' . $e->getMessage());
             return response()->json([
                 'error' => $e->getMessage(),
             ], $statusCode);

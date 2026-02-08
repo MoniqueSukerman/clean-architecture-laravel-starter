@@ -6,6 +6,8 @@ use App\Application\Task\Input\CreateTaskInput;
 use App\Application\Task\Mapper\AppToDomainMapper;
 use App\Application\Task\Mapper\DomainToAppMapper;
 use App\Application\Task\Output\CreateTaskOutput;
+use App\Domain\Exception\Http\BadRequestException;
+use App\Domain\Log\LoggerInterface;
 use App\Domain\Repository\Task\TaskRepository;
 
 class CreateTaskUseCase
@@ -14,24 +16,20 @@ class CreateTaskUseCase
         private readonly TaskRepository    $taskRepository, //Interface - o Mapeamento para a classe concreta é feito em app/Providers/AppServiceProvider.php
         private readonly AppToDomainMapper $appToDomain,
         private readonly DomainToAppMapper $domainToApp,
+        private readonly LoggerInterface $logger,
     )
     {
     }
 
+    /**
+     * @throws BadRequestException
+     */
     public function execute(CreateTaskInput $input): CreateTaskOutput
     {
-        /**
-         * Mapeia o DTO de entrada para uma entidade de domínio
-         */
+        $this->logger->info('Criando tarefa');
         $domainTask = $this->appToDomain->createInputToTaskDomain($input);
-        /**
-         * Passa a entidade de domínio para o repositório, que retorna uma entidade de domínio
-         */
         $createdTask = $this->taskRepository->create($domainTask);
 
-        /**
-         * Mapeia a entidade de domínio para o DTO de saída
-         */
         return $this->domainToApp->taskDomainToCreateOutput($createdTask);
     }
 }
