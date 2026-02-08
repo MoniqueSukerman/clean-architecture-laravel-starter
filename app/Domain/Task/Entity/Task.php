@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Domain\Entity\Task;
+namespace App\Domain\Task\Entity;
 
-use App\Domain\ValueObject\Task\TaskStatus;
-use App\Domain\ValueObject\Task\TaskTitle;
+use App\Domain\Task\ValueObject\TaskStatus;
+use App\Domain\Task\ValueObject\TaskTitle;
 
 readonly class Task
 {

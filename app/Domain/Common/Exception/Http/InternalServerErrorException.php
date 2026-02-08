@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Domain\Exception\Http;
+namespace App\Domain\Common\Exception\Http;
 
-use App\Domain\ValueObject\Http\HttpCode;
+use App\Domain\Common\ValueObject\Http\HttpCode;
 
 class InternalServerErrorException extends HttpException
 {

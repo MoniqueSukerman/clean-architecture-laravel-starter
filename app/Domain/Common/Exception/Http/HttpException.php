@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Domain\Exception\Http;
+namespace App\Domain\Common\Exception\Http;
 
-use App\Domain\Exception\DomainException;
+use App\Domain\Common\Exception\DomainException;
 
 abstract class HttpException extends DomainException
 {

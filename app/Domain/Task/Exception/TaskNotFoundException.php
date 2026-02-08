@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Domain\Exception\Task;
+namespace App\Domain\Task\Exception;
 
-use App\Domain\Exception\Http\NotFoundException;
+use App\Domain\Common\Exception\Http\NotFoundException;
 
 class TaskNotFoundException extends NotFoundException
 {

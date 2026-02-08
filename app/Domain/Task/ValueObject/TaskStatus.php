@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\ValueObject\Task;
+namespace App\Domain\Task\ValueObject;
 
 enum TaskStatus : string
 {

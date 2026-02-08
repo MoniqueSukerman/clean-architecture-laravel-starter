@@ -4,8 +4,8 @@ namespace App\Application\Task\UseCase;
 
 use App\Application\Task\Mapper\DomainToAppMapper;
 use App\Application\Task\Output\FindAllTasksOutput;
-use App\Domain\Log\LoggerInterface;
-use App\Domain\Repository\Task\TaskRepository;
+use App\Domain\Common\Log\LoggerInterface;
+use App\Domain\Task\Repository\TaskRepository;
 
 class FindAllTasksUseCase
 {

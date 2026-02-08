@@ -4,10 +4,10 @@ namespace App\Application\Task\Mapper;
 
 use App\Application\Task\Input\CreateTaskInput;
 use App\Application\Task\Input\UpdateTaskInput;
-use App\Domain\Entity\Task\Task;
-use App\Domain\Exception\Http\BadRequestException;
-use App\Domain\ValueObject\Task\TaskStatus;
-use App\Domain\ValueObject\Task\TaskTitle;
+use App\Domain\Common\Exception\Http\BadRequestException;
+use App\Domain\Task\Entity\Task;
+use App\Domain\Task\ValueObject\TaskStatus;
+use App\Domain\Task\ValueObject\TaskTitle;
 
 class AppToDomainMapper
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Log;
+namespace App\Domain\Common\Log;
 
 interface LoggerInterface
 {

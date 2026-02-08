@@ -3,7 +3,7 @@
 namespace App\Infrastructure\Http\Controllers\Task;
 
 use App\Application\Task\UseCase\DeleteTaskUseCase;
-use App\Domain\Log\LoggerInterface;
+use App\Domain\Common\Log\LoggerInterface;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;

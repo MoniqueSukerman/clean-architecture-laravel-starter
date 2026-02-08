@@ -6,8 +6,8 @@ use App\Application\Task\Input\UpdateTaskInput;
 use App\Application\Task\Mapper\AppToDomainMapper;
 use App\Application\Task\Mapper\DomainToAppMapper;
 use App\Application\Task\Output\UpdateTaskOutput;
-use App\Domain\Log\LoggerInterface;
-use App\Domain\Repository\Task\TaskRepository;
+use App\Domain\Common\Log\LoggerInterface;
+use App\Domain\Task\Repository\TaskRepository;
 
 class UpdateTaskUseCase
 {

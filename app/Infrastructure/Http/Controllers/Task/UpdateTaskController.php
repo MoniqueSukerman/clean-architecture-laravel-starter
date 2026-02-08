@@ -4,10 +4,9 @@ namespace App\Infrastructure\Http\Controllers\Task;
 
 use App\Application\Task\Input\UpdateTaskInput;
 use App\Application\Task\UseCase\UpdateTaskUseCase;
-use App\Domain\Log\LoggerInterface;
+use App\Domain\Common\Log\LoggerInterface;
 use App\Infrastructure\Http\Requests\Task\UpdateTaskRequest;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class UpdateTaskController
 {

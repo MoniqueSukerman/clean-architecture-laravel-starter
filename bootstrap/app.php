@@ -1,10 +1,10 @@
 <?php
 
-use App\Domain\ValueObject\Http\HttpCode;
+use App\Domain\Common\Exception\Http\HttpException;
+use App\Domain\Common\ValueObject\Http\HttpCode;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
-use App\Domain\Exception\Http\HttpException;
 use Illuminate\Validation\ValidationException;
 
 return Application::configure(basePath: dirname(__DIR__))

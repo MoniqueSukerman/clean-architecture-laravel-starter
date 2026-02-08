@@ -4,11 +4,10 @@ namespace App\Infrastructure\Http\Controllers\Task;
 
 use App\Application\Task\Input\CreateTaskInput;
 use App\Application\Task\UseCase\CreateTaskUseCase;
-use App\Domain\Exception\Http\BadRequestException;
-use App\Domain\Log\LoggerInterface;
+use App\Domain\Common\Exception\Http\BadRequestException;
+use App\Domain\Common\Log\LoggerInterface;
 use App\Infrastructure\Http\Requests\Task\CreateTaskRequest;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class CreateTaskController
 {

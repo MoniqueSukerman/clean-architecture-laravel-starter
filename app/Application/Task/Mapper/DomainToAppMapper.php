@@ -6,7 +6,7 @@ use App\Application\Task\Output\CreateTaskOutput;
 use App\Application\Task\Output\FindAllTasksOutput;
 use App\Application\Task\Output\FindTaskOutput;
 use App\Application\Task\Output\UpdateTaskOutput;
-use App\Domain\Entity\Task\Task;
+use App\Domain\Task\Entity\Task;
 
 class DomainToAppMapper
 {

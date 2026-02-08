@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Domain\ValueObject\Task;
+namespace App\Domain\Task\ValueObject;
 
-use App\Domain\Exception\Http\BadRequestException;
+use App\Domain\Common\Exception\Http\BadRequestException;
 
 readonly class TaskTitle
 {

@@ -6,9 +6,9 @@ use App\Application\Task\Input\CreateTaskInput;
 use App\Application\Task\Mapper\AppToDomainMapper;
 use App\Application\Task\Mapper\DomainToAppMapper;
 use App\Application\Task\Output\CreateTaskOutput;
-use App\Domain\Exception\Http\BadRequestException;
-use App\Domain\Log\LoggerInterface;
-use App\Domain\Repository\Task\TaskRepository;
+use App\Domain\Common\Exception\Http\BadRequestException;
+use App\Domain\Common\Log\LoggerInterface;
+use App\Domain\Task\Repository\TaskRepository;
 
 class CreateTaskUseCase
 {

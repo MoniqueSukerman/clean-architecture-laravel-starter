@@ -2,14 +2,14 @@
 
 namespace App\Infrastructure\Eloquent\Repository;
 
-use App\Domain\Exception\Http\BadRequestException;
-use App\Domain\Exception\Http\InternalServerErrorException;
-use App\Domain\Exception\Task\TaskNotFoundException;
-use App\Domain\Repository\Task\TaskRepository;
-use App\Domain\ValueObject\Task\TaskStatus;
+use App\Domain\Common\Exception\Http\BadRequestException;
+use App\Domain\Common\Exception\Http\InternalServerErrorException;
+use App\Domain\Task\Entity\Task as DomainTask;
+use App\Domain\Task\Exception\TaskNotFoundException;
+use App\Domain\Task\Repository\TaskRepository;
+use App\Domain\Task\ValueObject\TaskStatus;
+use App\Domain\Task\ValueObject\TaskTitle;
 use App\Infrastructure\Eloquent\Model\Task;
-use \App\Domain\Entity\Task\Task as DomainTask;
-use App\Domain\ValueObject\Task\TaskTitle;
 use Illuminate\Database\QueryException;
 
 class TaskEloquentRepository implements TaskRepository

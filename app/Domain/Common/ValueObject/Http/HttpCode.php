@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\ValueObject\Http;
+namespace App\Domain\Common\ValueObject\Http;
 
 enum HttpCode: int
 {

@@ -2,7 +2,7 @@
 
 namespace App\Infrastructure\Log;
 
-use App\Domain\Log\LoggerInterface;
+use App\Domain\Common\Log\LoggerInterface;
 use Illuminate\Support\Facades\Log;
 
 class LaravelLogger implements LoggerInterface
