@@ -3,26 +3,33 @@
 namespace App\Infrastructure\Eloquent\Repository;
 
 use App\Domain\Exception\Http\BadRequestException;
+use App\Domain\Exception\Http\InternalServerErrorException;
 use App\Domain\Exception\Task\TaskNotFoundException;
 use App\Domain\Repository\Task\TaskRepository;
 use App\Domain\ValueObject\Task\TaskStatus;
 use App\Infrastructure\Eloquent\Model\Task;
 use \App\Domain\Entity\Task\Task as DomainTask;
 use App\Domain\ValueObject\Task\TaskTitle;
+use Illuminate\Database\QueryException;
 
 class TaskEloquentRepository implements TaskRepository
 {
     /**
      * Recebe uma entidade de domínio e retorna uma entidade de domínio. Porque a camada de aplicação não conhece Eloquent
      * @throws BadRequestException
+     * @throws InternalServerErrorException
      */
     public function create(DomainTask $task): DomainTask
     {
+        try {
         $eloquentTask = Task::create([
             'title' => $task->title->value,
             'description' => $task->description,
             'status' => $task->status->value,
         ]);
+        } catch (QueryException $e) {
+            throw new InternalServerErrorException('Erro ao criar tarefa');
+        }
 
         return new DomainTask(new TaskTitle($eloquentTask->title), $eloquentTask->description, TaskStatus::from($eloquentTask->status), $eloquentTask->id);
     }
@@ -30,6 +37,7 @@ class TaskEloquentRepository implements TaskRepository
     /**
      * @throws TaskNotFoundException
      * @throws BadRequestException
+     * @throws InternalServerErrorException
      */
     public function update(DomainTask $task): DomainTask
     {
@@ -42,13 +50,19 @@ class TaskEloquentRepository implements TaskRepository
         $eloquentTask->title = $task->title->value;
         $eloquentTask->description = $task->description;
         $eloquentTask->status = $task->status->value;
-        $eloquentTask->save();
+
+        try {
+            $eloquentTask->save();
+        } catch (QueryException $e) {
+            throw new InternalServerErrorException('Erro ao atualizar tarefa');
+        }
 
         return new DomainTask(new TaskTitle($eloquentTask->title), $eloquentTask->description, TaskStatus::from($eloquentTask->status), $eloquentTask->id);
     }
 
     /**
      * @throws TaskNotFoundException
+     * @throws InternalServerErrorException
      */
     public function delete(string $id): void
     {
@@ -58,7 +72,11 @@ class TaskEloquentRepository implements TaskRepository
             throw new TaskNotFoundException($id);
         }
 
-        Task::destroy($id);
+        try {
+            Task::destroy($id);
+        } catch (QueryException $e) {
+            throw new InternalServerErrorException('Erro ao deletar tarefa');
+        }
     }
 
     /**
